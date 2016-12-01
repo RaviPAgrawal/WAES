@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean id="queryDao" class="com.myapp.myapp_dao.QueryDao">
+		<property name="map">
+			<map>
+				<entry key="IS_DIFF_EXISTS">
+					<value>
+						SELECT * FROM diff_data WHERE user_id = :userId
+					</value>
+				</entry>
+				
+				<entry key="SAVE_LEFT_DATA">
+					<value>
+						UPDATE diff_data SET left_data = :leftData WHERE user_id = :userId
+					</value>
+				</entry>
+				
+				<entry key="SAVE_RIGHT_DATA">
+					<value>
+						UPDATE diff_data SET right_data = :rightData WHERE user_id = :userId
+					</value>
+				</entry>
+				
+				<entry key="CREATE_NEW_DATA">
+					<value>
+						INSERT INTO diff_data(user_id, left_data, right_data) VALUES (:userId, :leftData, :rightData)
+					</value>
+				</entry>
+
+				<entry key="GET_DIFF_DATA">
+					<value>
+						SELECT left_data, right_data FROM diff_data WHERE user_id = :userId
+					</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>
